@@ -2,9 +2,8 @@ SQL_SERVER=sqlserver
 SQL_PASSWORD=lM3am0Rf9
 DOCKER_NETWORK=openhack
 
-# Perform docker system prune
-
-docker system prune
+docker stop container $SQL_SERVER && docker rm container $SQL_SERVER
+docker stop container poi && docker rm container poi
 
 # 1) Create docker network named "openhack"
 
@@ -13,7 +12,7 @@ docker network create $DOCKER_NETWORK
 # 2) Run SQL Server 2017 container in "openhack" docker network
 
 docker run --network $DOCKER_NETWORK -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=$SQL_PASSWORD" -p 1433:1433 \
---name sqlserver -d mcr.microsoft.com/mssql/server:2017-latest 
+--name $SQL_SERVER -d mcr.microsoft.com/mssql/server:2017-latest 
 
 # 3) Create myDrivingDB database
 
@@ -25,18 +24,14 @@ docker exec \
 
 # 4) Run dataload against local SQL Server
 
-docker run --network $DOCKER_NETWORK -e SQLFQDN=$SQL_SERVER -e SQLUSER=SA -e SQLPASS=lM3am0Rf9 -e SQLDB=myDrivingDB registryacm8754.azurecr.io/dataload:1.0
+docker run --network $DOCKER_NETWORK -e SQLFQDN=$SQL_SERVER -e SQLUSER=SA -e SQLPASS=$SQL_PASSWORD -e SQLDB=myDrivingDB registryacm8754.azurecr.io/dataload:1.0
 
-# 5) Build POI API container
-
-docker build -f Dockerfile -t "tripinsights/poi:1.0" .
-
-# 6) Run POI API container in "openhack" docker network
+# 5) Run POI API container in "openhack" docker network
 
 docker run -d -p 8080:80 --name poi --network $DOCKER_NETWORK \
 -e "SQL_PASSWORD=$SQL_PASSWORD" -e "SQL_SERVER=$SQL_SERVER" -e "SQL_DBNAME=myDrivingDB" \
 -e "SQL_USER=SA" -e "ASPNETCORE_ENVIRONMENT=Local" tripinsights/poi:1.0
 
-# 7) Verify that data can be pull from POI API (using SQL Server backend)
+# 6) Verify that data can be pull from POI API (using SQL Server backend)
 
 curl -i -X GET 'http://localhost:8080/api/poi' 
