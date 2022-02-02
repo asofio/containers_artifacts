@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-java
+spec:
+  selector:
+    matchLabels:
+      app: user-java
+  template:
+    metadata:
+      labels:
+        app: user-java
+    spec:
+      containers:
+      - name: user-java
+        image: registryacm8754.azurecr.io/poi:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80 # the application listens to this port
+        env:
+        - name: SQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sqlconnectioninfo
+              key: SQL_PASSWORD
+        - name: SQL_SERVER
+          valueFrom:
+            secretKeyRef:
+              name: sqlconnectioninfo
+              key: SQL_SERVER
+        - name: SQL_DBNAME
+          valueFrom:
+            secretKeyRef:
+              name: sqlconnectioninfo
+              key: SQL_DBNAME
+        - name: SQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: sqlconnectioninfo
+              key: SQL_USER
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        resources:
+          requests: # minimum resources required
+            cpu: 250m
+            memory: 64Mi
+          limits: # maximum resources allocated
+            cpu: 500m
+            memory: 512Mi
