@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tripviewer
+  namespace: default
 spec:
   selector:
     matchLabels:
@@ -19,11 +20,13 @@ spec:
         - containerPort: 80 # the application listens to this port
         env:
         - name: USERPROFILE_API_ENDPOINT
-          value: foo
+          value: http://userprofile
         - name: TRIPS_API_ENDPOINT
-          value: foo
+          value: http://trips
         - name: ASPNETCORE_ENVIRONMENT
           value: Development
+        - name: BING_MAPS_KEY
+          value: ''
         resources:
           requests: # minimum resources required
             cpu: 250m
@@ -31,3 +34,16 @@ spec:
           limits: # maximum resources allocated
             cpu: 500m
             memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tripviewer
+spec:
+  selector:
+    app: tripviewer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer

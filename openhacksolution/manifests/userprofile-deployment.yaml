@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: poi
+  name: userprofile
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: poi
+      app: userprofile
   template:
     metadata:
       labels:
-        app: poi
+        app: userprofile
     spec:
       containers:
-      - name: poi
-        image: registryacm8754.azurecr.io/poi:1.0
+      - name: userprofile
+        image: registryacm8754.azurecr.io/userprofile:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80 # the application listens to this port
@@ -39,8 +39,6 @@ spec:
             secretKeyRef:
               name: sqlconnectioninfo
               key: SQL_USER
-        - name: ASPNETCORE_ENVIRONMENT
-          value: Development
         resources:
           requests: # minimum resources required
             cpu: 250m
@@ -52,10 +50,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: poi
+  name: userprofile
 spec:
   selector:
-    app: poi
+    app: userprofile
   ports:
   - protocol: TCP
     port: 80

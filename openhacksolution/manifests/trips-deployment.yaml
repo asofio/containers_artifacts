@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: poi
+  name: trips
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: poi
+      app: trips
   template:
     metadata:
       labels:
-        app: poi
+        app: trips
     spec:
       containers:
-      - name: poi
-        image: registryacm8754.azurecr.io/poi:1.0
+      - name: trips
+        image: registryacm8754.azurecr.io/trips:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80 # the application listens to this port
@@ -39,8 +39,8 @@ spec:
             secretKeyRef:
               name: sqlconnectioninfo
               key: SQL_USER
-        - name: ASPNETCORE_ENVIRONMENT
-          value: Development
+        - name: OPENAPI_DOCS_URI
+          value: http://trips/swagger/v1/swagger.json
         resources:
           requests: # minimum resources required
             cpu: 250m
@@ -52,10 +52,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: poi
+  name: trips
 spec:
   selector:
-    app: poi
+    app: trips
   ports:
   - protocol: TCP
     port: 80
