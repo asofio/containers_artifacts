@@ -16,7 +16,7 @@ spec:
         image: registryacm8754.azurecr.io/poi:1.0
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080 # the application listens to this port
+        - containerPort: 80 # the application listens to this port
         env:
         - name: SQL_PASSWORD
           valueFrom:
