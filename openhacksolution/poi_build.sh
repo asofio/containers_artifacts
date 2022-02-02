@@ -1,5 +1,5 @@
 #!/bin/bash
-# This script assumes that you are running this from the 'poi' directory
+# This script assumes that you are running this from the 'openhacksolution' directory
 
 # Set ENV variables
 . set_variables.sh
