@@ -1,0 +1,16 @@
+Create an AKS cluster
+- Need it to be authenticated against ACR
+- One pod per component (5 pods)
+
+Deployment
+- Create a namespace in AKS for our stuff... "openhack"
+- Create deployment manifests for each api (these need to reference k8s secrets... no hard-coded stuff)
+    - poi
+    - trip Viewer
+    - user profile
+    - user java
+    - trips
+- Create kubernetes service to expose Trip Viewer
+
+Configuration
+- Setup a kubernetes secret containing SQL Connection Info
