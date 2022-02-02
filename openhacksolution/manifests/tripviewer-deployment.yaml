@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripviewer
+spec:
+  selector:
+    matchLabels:
+      app: tripviewer
+  template:
+    metadata:
+      labels:
+        app: tripviewer
+    spec:
+      containers:
+      - name: tripviewer
+        image: registryacm8754.azurecr.io/tripviewer:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8082 # the application listens to this port
+        env:
+        - name: USERPROFILE_API_ENDPOINT
+          value: foo
+        - name: TRIPS_API_ENDPOINT
+          value: foo
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        resources:
+          requests: # minimum resources required
+            cpu: 250m
+            memory: 64Mi
+          limits: # maximum resources allocated
+            cpu: 500m
+            memory: 512Mi
