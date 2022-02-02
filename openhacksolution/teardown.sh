@@ -14,6 +14,10 @@
 # Stop any containers that are currently running
 docker stop container $SQL_SERVER && docker rm container $SQL_SERVER
 docker stop container poi && docker rm container poi
+docker stop container trip && docker rm container trips
+docker stop container tripviewer && docker rm container tripviewer
+docker stop container userprofile && docker rm container userprofile
+docker stop container user-java && docker rm container user-java
 
 
 # To additionally remove any stopped containers and all unused images
