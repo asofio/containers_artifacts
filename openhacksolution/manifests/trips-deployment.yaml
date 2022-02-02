@@ -39,6 +39,12 @@ spec:
             secretKeyRef:
               name: sqlconnectioninfo
               key: SQL_USER
+        - name: CREDENTIAL_METHOD
+          value: username_and_password
+        - name: IDENTITY_CLIENT_ID
+          value: ''
+        - name: DEBUG_LOGGING
+          value: 'true'
         - name: OPENAPI_DOCS_URI
           value: http://trips/swagger/v1/swagger.json
         resources:
