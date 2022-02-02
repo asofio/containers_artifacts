@@ -1,9 +1,10 @@
 #!/bin/bash
+# This script assumes that you are running this from the 'poi' directory
 
 # Set ENV variables
 . set_variables.sh
 
-context_path=~/_git/openhack/containers_artifacts/src/poi/
+context_path=`pwd`
 
 pushd $context_path
 
@@ -11,7 +12,7 @@ pushd $context_path
 docker network create $DOCKER_NETWORK
 
 # Build the poi application image
-docker build --no-cache --build-arg IMAGE_VERSION="1.0" --build-arg IMAGE_CREATE_DATE="`date -u +"%Y-%m-%dT%H:%M:%SZ"`" --build-arg IMAGE_SOURCE_REVISION="`git rev-parse HEAD`" -f Dockerfile -t "tripinsights/poi:1.0" .
+docker build --no-cache --build-arg IMAGE_VERSION="1.0" --build-arg IMAGE_CREATE_DATE="`date -u +"%Y-%m-%dT%H:%M:%SZ"`" --build-arg IMAGE_SOURCE_REVISION="`git rev-parse HEAD`" -f ../../dockerfiles/Dockerfile_3 -t "tripinsights/poi:1.0" .
 
 
 # 2) Run SQL Server 2017 container in "openhack" docker network
