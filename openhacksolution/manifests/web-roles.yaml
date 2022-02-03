@@ -4,7 +4,7 @@ metadata:
   name: web-edit-access
   namespace: web
 rules:
-- apiGroups: ["*"]
+- apiGroups: ["", "apps", "extensions"]
   resources: ["*"]
   verbs: ["update", "replace", "patch"]
 ---
@@ -14,6 +14,6 @@ metadata:
   name: web-read-access
   namespace: web
 rules:
-- apiGroups: ["*"]
+- apiGroups: ["", "apps", "extensions"]
   resources: ["*"]
   verbs: ["get", "list", "watch"]
