@@ -1,0 +1,7 @@
+Port Forwarding:
+
+kubectl port-forward $(kubectl get po -l  app=userprofile -o name) 8080:80
+
+Display a secret:
+
+kubectl get secrets/sqlconnectioninfo --template={{.data.SQL_SERVER}} | base64 -D

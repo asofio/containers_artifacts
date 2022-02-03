@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: user-java
-        image: registryacm8754.azurecr.io/poi:1.0
+        image: registryacm8754.azurecr.io/user-java:1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 80 # the application listens to this port
@@ -38,8 +38,6 @@ spec:
             secretKeyRef:
               name: sqlconnectioninfo
               key: SQL_USER
-        - name: ASPNETCORE_ENVIRONMENT
-          value: Development
         resources:
           requests: # minimum resources required
             cpu: 250m

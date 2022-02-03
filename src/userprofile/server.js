@@ -36,7 +36,7 @@ function getConfigValue(config) {
     if (!value) {
         value = process.env[name];
         value = (value) ? value.trim() : '';
-        console.log("Config '%s' has %svalue set from ENV '%s'.", name, value ? '' : 'no ', name)
+        console.log("Config '%s' has %svalue %s set from ENV '%s'.", name, value ? '' : 'no ', value, name)
     }
     if (!value) {
         value = defaultValue.trim();
