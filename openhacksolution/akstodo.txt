@@ -14,3 +14,18 @@ Deployment
 
 Configuration
 - Setup a kubernetes secret containing SQL Connection Info
+
+
+Challenge 4
+
+Tear down current AKS cluster
+- Change the AKS create to Azure CNI against the existing VNET
+- Change the AKS create to enable AAD integration 
+- Create two namespaces: api, web
+
+AKS Deployments
+- Adjust the AKS deployments to segment components into their appropriate namespace
+
+AAD
+- Create and/or make sure api-dev and web-dev AAD users exist
+- Ensure these users have appropriate access (web-dev to web namespace and api-dev to api namespace)
