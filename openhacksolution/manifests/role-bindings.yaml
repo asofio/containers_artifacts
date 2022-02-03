@@ -11,9 +11,11 @@ roleRef:
 subjects:
 - kind: Group
   name: be991cfd-8f2a-48b7-b4fc-2d1f75e3d7b3
+  namespace: api
   apiGroup: rbac.authorization.k8s.io
 - kind: Group
   name: 8807b18b-15b7-4593-88ab-380e10a73352
+  namespace: api
   apiGroup: rbac.authorization.k8s.io
 ---
 # api namespace edit access
