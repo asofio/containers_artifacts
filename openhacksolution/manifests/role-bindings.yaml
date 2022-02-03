@@ -1,0 +1,65 @@
+# api namespace read access
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: api-read-access-assign
+  namespace: api
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: api-read-access
+subjects:
+- kind: Group
+  name: be991cfd-8f2a-48b7-b4fc-2d1f75e3d7b3
+  apiGroup: rbac.authorization.k8s.io
+- kind: Group
+  name: 8807b18b-15b7-4593-88ab-380e10a73352
+  apiGroup: rbac.authorization.k8s.io
+---
+# api namespace edit access
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: api-edit-access-assign
+  namespace: api
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: api-edit-access
+subjects:
+- kind: Group
+  name: be991cfd-8f2a-48b7-b4fc-2d1f75e3d7b3
+  apiGroup: rbac.authorization.k8s.io
+---
+# web namespace read access
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-read-access-assign
+  namespace: web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: web-read-access
+subjects:
+- kind: Group
+  name: be991cfd-8f2a-48b7-b4fc-2d1f75e3d7b3
+  apiGroup: rbac.authorization.k8s.io
+- kind: Group
+  name: 8807b18b-15b7-4593-88ab-380e10a73352
+  apiGroup: rbac.authorization.k8s.io
+---
+# web namespace edit access
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-edit-access-assign
+  namespace: web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: web-edit-access
+subjects:
+- kind: Group
+  name: 8807b18b-15b7-4593-88ab-380e10a73352
+  apiGroup: rbac.authorization.k8s.io

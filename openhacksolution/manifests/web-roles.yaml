@@ -1,0 +1,19 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-edit-access
+  namespace: web
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["update", "replace", "patch"]
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-read-access
+  namespace: web
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
